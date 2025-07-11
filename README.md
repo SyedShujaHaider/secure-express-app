@@ -1,57 +1,131 @@
-# Login-Register-Nodejs
-A simple Login/Register application developed in Nodejs using Express.
+🔐 Secure Express App
 
-# Getting started
+This project demonstrates core web application security mechanisms implemented in a Node.js + Express.js application as part of a cybersecurity internship.
 
-Unzip the downloaded file.
+---
 
-### Installing dependencies:
-Enter this command it will install all the dependencies at once:
+✅ Features Implemented
 
-```
+1. Rate Limiting
+Protects the server from abuse or brute-force attacks using `express-rate-limit`.
+
+- Each IP is limited to 100 requests every 15 minutes.
+- Users exceeding this limit get a `429 Too Many Requests` error.
+
+---
+
+2. CORS (Cross-Origin Resource Sharing)
+Cross-origin requests are restricted to http://localhost:3000.
+
+- All other origins are blocked by CORS policy.
+- Protects against unauthorized cross-site requests.
+
+---
+
+3. Helmet Security Headers
+The app uses helmet to set critical HTTP headers for protection.
+
+🔐 Content Security Policy (CSP)
+Blocks unauthorized scripts:
+
+helmet.contentSecurityPolicy({
+  directives: {
+    defaultSrc: ["'self'"],
+    scriptSrc: ["'self'"],
+    objectSrc: ["'none'"],
+    upgradeInsecureRequests: [],
+  }
+});
+
+---
+
+📦 HTTP Strict Transport Security (HSTS)
+Enforces HTTPS connections:
+
+
+helmet.hsts({
+  maxAge: 31536000,
+  includeSubDomains: true,
+  preload: true,
+});
+
+---
+
+4. API Key Authentication
+A secure route is protected with an API key.
+
+🔓 Without API key: 
+
+curl http://localhost:3000/secure-api/data
+
+Response:
+
+{ "message": "❌ Unauthorized: Invalid or missing API key." }
+
+🔐 With API key: 
+
+curl -H "x-api-key: supersecretkey123" http://localhost:3000/secure-api/data
+
+Response:
+
+{ "message": "✅ Access granted to secure API route." }
+
+---
+
+🧪 How to Run the Project Locally
+
+1. Clone the Repository 
+
+git clone https://github.com/SyedShujaHaider/secure-express-app.git
+cd secure-express-app
+
+
+2. Install Dependencies 
+
 npm install
-```
-Or you can install them individually:
 
-```
-npm install express express-session mysql pug-cli bcrypt util.promisify
-```
 
-Sometimes you get errors and access denied add sudo to the command
+3. Start the Server 
 
-```
-sudo npm install express express-session mysql pug-cli bcrypt util.promisify
-```
+node app.js
 
-### Start the application
 
-```
-npm start
-```
-or
-```
-node app
-```
-### Database
+The server will run at: http://localhost:3000
 
-For this application the database  name is 'www', it contains only one table 'users'
+---
 
-Go to core/pool.js enter your database username and password, you can use you own database name just make sure it's the same in the pool.js file so you can connect to database.
+📁 Project Structure
 
-### Setting up the database
+secure-express-app/
+├── app.js
+├── routes/
+│   └── pages.js
+├── views/
+│   └── *.pug
+├── public/
+│   └── css, js, assets
+├── screenshots/
+│   └── *.png   <-- Put your screenshots here
+└── README.md
 
-You can use PhpMyAdmin just import the database.sql file includes in the project directory
 
-Use those queries:
+---
 
-```
-CREATE DATABASE www;
-```
-```
-USE www;
-```
-```
-CREATE TABLE users (id int AUTO_INCREMENT, username varchar(20), fullname varchar(20), password varchar(128), PRIMARY KEY (id));
-```
+🛠 Technologies Used
 
-if you correcty setting up the database you shouldn't get any errors.
+- Node.js 
+- Express.js 
+- Helmet 
+- CORS 
+- express-rate-limit 
+- API Key Authentication 
+- Pug 
+- Git/GitHub
+
+---
+
+🧠 Author
+
+Syed Shuja Haider 
+Cybersecurity Internship – Week 4 Final Submission 
+🔗 GitHub Repository: https://github.com/SyedShujaHaider/secure-express-app
