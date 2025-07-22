@@ -50,6 +50,7 @@ router.post('/login', (req, res, next) => {
 
 // Post register data
 router.post('/register', (req, res, next) => {
+    console.log('Register POST:', req.body);
     // prepare an object containing all user inputs.
     let userInput = {
         username: req.body.username,
@@ -84,6 +85,16 @@ router.get('/loggout', (req, res, next) => {
             res.redirect('/');
         });
     }
+});
+
+// Render the register page
+router.get('/register', (req, res) => {
+    res.render('includes/register', { csrfToken: req.csrfToken() });
+});
+
+// Render the login page
+router.get('/login', (req, res) => {
+    res.render('includes/login', { csrfToken: req.csrfToken() });
 });
 
 module.exports = router;

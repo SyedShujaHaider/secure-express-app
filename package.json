@@ -4,7 +4,7 @@
   "description": "Simple Login/Register app in nodejs with mysql",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -25,12 +25,16 @@
   "homepage": "https://github.com/sefianecho/Login-Register-Nodejs#readme",
   "dependencies": {
     "bcrypt": "^5.0.0",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
+    "csurf": "^1.11.0",
+    "dotenv": "^17.2.0",
     "express": "^4.17.1",
     "express-rate-limit": "^7.5.1",
     "express-session": "^1.17.1",
     "helmet": "^8.1.0",
     "mysql": "^2.18.1",
+    "mysql2": "^3.14.2",
     "pug": "^3.0.0",
     "util.promisify": "^1.0.1"
   },
